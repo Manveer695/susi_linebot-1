@@ -18,12 +18,12 @@ const app = express();
 
 app.get('/',function(req, res){
 	res.writeHead(200);
-	res.write('Hi ayub');
+	res.write('Hi User');
 	res.end();	
 });
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
-app.post('/webhook', line.middleware(config), (req, res) => {
+app.post('https://susi-linebot.herokuapp.com/', line.middleware(config), (req, res) => {
   Promise
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result));
