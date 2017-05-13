@@ -28,7 +28,7 @@ app.get('/',function(req, res){
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
-var request1 = https.request( httpsOptions);
+var request1 = https.request();
 
 app.post('/webhook', line.middleware(config), (request1, res) => {
   Promise
