@@ -5,6 +5,7 @@ const express = require('express');
 const middleware = require('@line/bot-sdk').middleware
 const JSONParseError = require('@line/bot-sdk/exceptions').JSONParseError
 const SignatureValidationFailed = require('@line/bot-sdk/exceptions').SignatureValidationFailed
+var https               = require("https");
 
 // create LINE SDK config from env variables
 const config = {
@@ -27,9 +28,11 @@ app.get('/',function(req, res){
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
-app.post('/webhook', line.middleware(config), (req, res) => {
+var request1 = https.request( httpsOptions);
+
+app.post('/webhook', line.middleware(config), (request1, res) => {
   Promise
-    .all(req.body.events.map(handleEvent))
+    .all(request1.body.events.map(handleEvent))
     .then((result) => res.json(result));
 });
 
