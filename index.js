@@ -2,10 +2,6 @@
 
 const line = require('@line/bot-sdk');
 const express = require('express');
-const middleware = require('@line/bot-sdk').middleware
-const JSONParseError = require('@line/bot-sdk/exceptions').JSONParseError
-const SignatureValidationFailed = require('@line/bot-sdk/exceptions').SignatureValidationFailed
-var https               = require("https");
 
 // create LINE SDK config from env variables
 const config = {
@@ -28,24 +24,11 @@ app.get('/',function(req, res){
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
-var request1 = https.request();
-
-app.post('/webhook', line.middleware(config), (request1, res) => {
+app.post('/webhook', line.middleware(config), (req, res) => {
   Promise
-    .all(request1.body.events.map(handleEvent))
+    .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result));
 });
-
-app.use((err, req, res, next) => {
-  if (err instanceof SignatureValidationFailed) {
-    res.status(401).send(err.signature);
-    return;
-  } else if (err instanceof JSONParseError) {
-    res.status(400).send(err.raw);
-    return;
-  }
-  next(err); // will throw default 500
-})
 
 // event handler
 function handleEvent(event) {
