@@ -25,7 +25,6 @@ app.get('/',function(req, res){
 // about the middleware, please refer to doc
 app.post('/webhook', line.middleware(config), (req, res) => {
   Promise
-  	res.status(200);
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result));
 });
