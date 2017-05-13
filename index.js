@@ -18,7 +18,7 @@ const app = express();
 
 app.get('/',function(req, res){
 	res.writeHead(200);
-	res.send('Hi ayub');
+	res.write('Hi ayub');
 	res.end();	
 });
 // register a webhook handler with middleware
