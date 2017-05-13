@@ -21,10 +21,11 @@ app.get('/',function(req, res){
 	res.write('Hi User');
 	res.end();	
 });
+
+app.use(middleware(config))
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
-app.post('/', line.middleware(config), (req, res) => {
-  Promise
+app.post('/webhook', (req, res) => {
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result));
 });
