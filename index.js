@@ -42,7 +42,7 @@ function handleEvent(event) {
   			if (error1) throw new Error(error1);
   			// answer fetched from susi
 			console.log(body1);
-			ans = (JSON.parse(body1)).answers[0].actions[0].expression; 
+			var ans = (JSON.parse(body1)).answers[0].actions[0].expression; 
 			  // create a echoing text message
   const echo = { type: 'text', text:ans  };
 
