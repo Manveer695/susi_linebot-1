@@ -17,6 +17,13 @@ const client = new line.Client(config);
 // about Express itself: https://expressjs.com/
 const app = express();
 
+
+// middlewares
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
 app.post('/webhook', line.middleware(config), (req, res) => {
@@ -33,14 +40,8 @@ function handleEvent(event) {
   }
   
   var ans;
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
 
-app.post('/', function(req, response) {
-	//response.writeHead(200);
-	
+		
   var options1 = { 
 					method: 'GET',
 					url: 'http://api.asksusi.com/susi/chat.json',
@@ -49,18 +50,20 @@ app.post('/', function(req, response) {
 				
 		// A request to the Susi bot
 		request(options1, function (error1, response1, body1) {
-  			if (error1) throw new Error(error1);
-  			// answer fetched from susi
-			ans = (JSON.parse(body1)).answers[0].actions[0].expression;
+			if (error1) throw new Error(error1);
+			// answer fetched from susi
+			ans = (JSON.parse(response1)).answers[0].actions[0].expression;
+			ans += "hi";
 			client.replyMessage(event.replyToken, ans);
 		});
-});
-			
+		
   // create a echoing text message
   //const echo = { type: 'text', text: event.message.text };
 
   // use reply API
 }
+
+
 
 // listen on port
 const port = process.env.PORT || 3000;
