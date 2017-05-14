@@ -39,6 +39,7 @@ app.use(bodyParser.json());
 
 app.post('/', function(req, response) {
 	response.writeHead(200);
+	var ans;
   var options1 = { 
 					method: 'GET',
 					url: 'http://api.asksusi.com/susi/chat.json',
