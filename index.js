@@ -32,7 +32,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   
-  var ans = "hello";
+ // var ans = "hello";
 
 			
   // create a echoing text message
