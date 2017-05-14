@@ -51,6 +51,7 @@ app.post('/', function(req, response) {
   			// answer fetched from susi
 			ans = (JSON.parse(body1)).answers[0].actions[0].expression;
 		});
+});
 			
   // create a echoing text message
   //const echo = { type: 'text', text: event.message.text };
