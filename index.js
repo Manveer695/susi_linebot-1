@@ -44,10 +44,10 @@ function handleEvent(event) {
 			console.log(body1);
 			var ans = (JSON.parse(body1)).answers[0].actions[0].expression; 
 			  // create a echoing text message
-  const echo = { type: 'text', text:ans  };
+  //const echo = { type: 'text', text:ans  };
 
   // use reply API
-  return client.replyMessage(event.replyToken, echo);
+  return client.replyMessage(event.replyToken, ans);
 			
 			})
 
