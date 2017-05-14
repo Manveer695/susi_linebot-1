@@ -1,6 +1,6 @@
 # Getting Started With Line SUSI AI Bot:
 
-![Alt text](/Assets/Barcode.png)
+![BARCODE](/Assets/Barcode.PNG)
 
 
 To add SUSI AI LINE Bot as your friend scan this qr code with Line app.
