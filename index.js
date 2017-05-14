@@ -31,7 +31,7 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-  
+  var ans;
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 
 app.post('/', function(req, response) {
 	response.writeHead(200);
-	var ans;
+	
   var options1 = { 
 					method: 'GET',
 					url: 'http://api.asksusi.com/susi/chat.json',
