@@ -32,7 +32,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   
-  var ans;
+  var ans = "hello";
 app.use(bodyParser.urlencoded({
     extended: true
 }));
