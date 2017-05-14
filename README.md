@@ -77,4 +77,4 @@ After making app copy this link and paste it in webhook url in Line channel cons
 
 ### SUSI AI BOT Set:
 
-![BOT](/Assets/SUSI_Chat.PNG)
+![BOT](/Assets/SUSI_Chat.PNG =200x100)
