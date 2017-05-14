@@ -18,11 +18,7 @@ const client = new line.Client(config);
 const app = express();
 
 
-// middlewares
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
+
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
@@ -31,6 +27,9 @@ app.post('/webhook', line.middleware(config), (req, res) => {
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result));
 });
+
+// middlewares
+app.use(bodyParser.json());
 
 // event handler
 function handleEvent(event) {
