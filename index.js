@@ -41,13 +41,13 @@ function handleEvent(event) {
 				request(options1, function (error1, response1, body1) {
   			if (error1) throw new Error(error1);
   			// answer fetched from susi
-			console.log(body1);
+			//console.log(body1);
 			var ans = (JSON.parse(body1)).answers[0].actions[0].expression; 
 			  // create a echoing text message
-  //const echo = { type: 'text', text:ans  };
+  const answer = { type: 'text', text:ans  };
 
   // use reply API
-  return client.replyMessage(event.replyToken, ans);
+  return client.replyMessage(event.replyToken, answer);
 			
 			})
 
