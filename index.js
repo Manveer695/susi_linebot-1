@@ -33,27 +33,7 @@ function handleEvent(event) {
   }
   
   var ans = "hello";
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
 
-app.post('/', function(req, response) {
-	response.writeHead(200);
-	
-  var options1 = { 
-					method: 'GET',
-					url: 'http://api.asksusi.com/susi/chat.json',
-					qs: { timezoneOffset: '-330', q: event.message.text }
-				};
-				
-		// A request to the Susi bot
-		request(options1, function (error1, response1, body1) {
-  			if (error1) throw new Error(error1);
-  			// answer fetched from susi
-			ans = (JSON.parse(body1)).answers[0].actions[0].expression;
-		});
-});
 			
   // create a echoing text message
   //const echo = { type: 'text', text: event.message.text };
