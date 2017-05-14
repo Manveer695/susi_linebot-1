@@ -2,6 +2,7 @@
 
 const line = require('@line/bot-sdk');
 const express = require('express');
+var request = require("request");
 
 // create LINE SDK config from env variables
 const config = {
@@ -30,12 +31,27 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-
-  // create a echoing text message
-  const echo = { type: 'text', text:'hi' + event.message.text  };
+  
+  var options1 = { 
+					method: 'GET',
+					url: 'http://api.asksusi.com/susi/chat.json',
+					qs: { timezoneOffset: '-330', q: event.message.text }
+				};
+				
+				request(options1, function (error1, response1, body1) {
+  			if (error1) throw new Error(error1);
+  			// answer fetched from susi
+			console.log(body1);
+			ans = (JSON.parse(body1)).answers[0].actions[0].expression; 
+			  // create a echoing text message
+  const echo = { type: 'text', text:ans  };
 
   // use reply API
   return client.replyMessage(event.replyToken, echo);
+			
+			})
+
+
 }
 
 // listen on port
