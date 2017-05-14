@@ -2,7 +2,6 @@
 
 const line = require('@line/bot-sdk');
 const express = require('express');
-const bodyParser = require('body-parser');
 
 // create LINE SDK config from env variables
 const config = {
@@ -17,9 +16,6 @@ const client = new line.Client(config);
 // about Express itself: https://expressjs.com/
 const app = express();
 
-
-
-
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
 app.post('/webhook', line.middleware(config), (req, res) => {
@@ -28,41 +24,19 @@ app.post('/webhook', line.middleware(config), (req, res) => {
     .then((result) => res.json(result));
 });
 
-// middlewares
-app.use(bodyParser.json());
-
 // event handler
 function handleEvent(event) {
   if (event.type !== 'message' || event.message.type !== 'text') {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-  
-  var ans;
 
-		
-  var options1 = { 
-					method: 'GET',
-					url: 'http://api.asksusi.com/susi/chat.json',
-					qs: { timezoneOffset: '-330', q: event.message.text }
-				};
-				
-		// A request to the Susi bot
-		request(options1, function (error1, response1, body1) {
-			if (error1) throw new Error(error1);
-			// answer fetched from susi
-			ans = (JSON.parse(response1)).answers[0].actions[0].expression;
-			console.log(response1);
-			client.replyMessage(event.replyToken, ans);
-		});
-		
   // create a echoing text message
-  //const echo = { type: 'text', text: event.message.text };
+  const echo = { type: 'text', text: event.message.text };
 
   // use reply API
+  return client.replyMessage(event.replyToken, echo);
 }
-
-
 
 // listen on port
 const port = process.env.PORT || 3000;
