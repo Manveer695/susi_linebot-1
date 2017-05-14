@@ -16,12 +16,6 @@ const client = new line.Client(config);
 // about Express itself: https://expressjs.com/
 const app = express();
 
-app.get('/',function(req, res){
-	res.writeHead(200);
-	res.write('Hi User');
-	res.end();	
-});
-
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
 app.post('/webhook', line.middleware(config), (req, res) => {
@@ -45,7 +39,7 @@ function handleEvent(event) {
 }
 
 // listen on port
-var port=Number(process.env.PORT || 3000);
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`listening on ${port}`);
 });
