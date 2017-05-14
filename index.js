@@ -2,6 +2,7 @@
 
 const line = require('@line/bot-sdk');
 const express = require('express');
+const bodyParser = require('body-parser');
 
 // create LINE SDK config from env variables
 const config = {
@@ -30,6 +31,11 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
+  
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 app.post('/', function(req, response) {
 	response.writeHead(200);
