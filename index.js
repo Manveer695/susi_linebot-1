@@ -32,14 +32,14 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   
- // var ans = "hello";
+  var ans = "hello";
 
 			
   // create a echoing text message
   const echo = { type: 'text', text: event.message.text };
 
   // use reply API
-  return client.replyMessage(event.replyToken, ans);
+  return client.replyMessage(event.replyToken, echo);
 }
 
 // listen on port
