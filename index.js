@@ -53,7 +53,7 @@ function handleEvent(event) {
 			if (error1) throw new Error(error1);
 			// answer fetched from susi
 			ans = (JSON.parse(response1)).answers[0].actions[0].expression;
-			ans += "hi";
+			console.log(response1);
 			client.replyMessage(event.replyToken, ans);
 		});
 		
