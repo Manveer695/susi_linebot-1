@@ -25,16 +25,6 @@ app.post('/webhook', line.middleware(config), (req, res) => {
     .then((result) => res.json(result));
 });
 
-  
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
-
-app.post('/', function(req, response) {
-	response.writeHead(200);
-	var ans;
-	
 // event handler
 function handleEvent(event) {
   if (event.type !== 'message' || event.message.type !== 'text') {
@@ -42,7 +32,14 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   
+  var ans;
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
+app.post('/', function(req, response) {
+	response.writeHead(200);
 	
   var options1 = { 
 					method: 'GET',
@@ -56,7 +53,7 @@ function handleEvent(event) {
   			// answer fetched from susi
 			ans = (JSON.parse(body1)).answers[0].actions[0].expression;
 		});
-
+});
 			
   // create a echoing text message
   //const echo = { type: 'text', text: event.message.text };
@@ -64,7 +61,6 @@ function handleEvent(event) {
   // use reply API
   return client.replyMessage(event.replyToken, ans);
 }
-});
 
 // listen on port
 const port = process.env.PORT || 3000;
