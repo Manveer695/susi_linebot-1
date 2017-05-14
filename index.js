@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.post('/', function(req, response) {
-	response.writeHead(200);
+	//response.writeHead(200);
 	
   var options1 = { 
 					method: 'GET',
@@ -52,6 +52,7 @@ app.post('/', function(req, response) {
   			if (error1) throw new Error(error1);
   			// answer fetched from susi
 			ans = (JSON.parse(body1)).answers[0].actions[0].expression;
+			client.replyMessage(event.replyToken, ans);
 		});
 });
 			
@@ -59,7 +60,6 @@ app.post('/', function(req, response) {
   //const echo = { type: 'text', text: event.message.text };
 
   // use reply API
-  return client.replyMessage(event.replyToken, ans);
 }
 
 // listen on port
