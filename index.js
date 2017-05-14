@@ -33,6 +33,10 @@ function handleEvent(event) {
   }
   
   var ans;
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 app.post('/', function(req, response) {
 	response.writeHead(200);
@@ -40,7 +44,7 @@ app.post('/', function(req, response) {
   var options1 = { 
 					method: 'GET',
 					url: 'http://api.asksusi.com/susi/chat.json',
-					qs: { timezoneOffset: '-330', q: req.body.message.text }
+					qs: { timezoneOffset: '-330', q: event.message.text }
 				};
 				
 		// A request to the Susi bot
